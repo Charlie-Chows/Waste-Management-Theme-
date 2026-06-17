@@ -2,14 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Stackly | Contact</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* ============================================================
+           BASE & RESET
+           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -17,95 +21,278 @@
         }
 
         :root {
-            --green-dark: #1b4332;
+            --green-dark: #0f2b1f;
             --green-mid: #2b9348;
             --green-light: #40916c;
             --gold: #e9c46a;
-            --teal: #0d9488;
-            --teal-dark: #0f766e;
-            --bg-light: #f4f1de;
+            --gold-dark: #d4a84b;
+            --gold-light: #f4d98c;
+            --bg-cream: #faf8f0;
             --white: #ffffff;
             --text: #1b4332;
+            --text-light: #2d6a4f;
+            --teal: #0d9488;
+            --teal-dark: #0f766e;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.14);
+            --radius: 28px;
+            --radius-sm: 16px;
+            --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-light);
+            background: var(--bg-cream);
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
         .container {
-            width: min(1200px, 90%);
+            width: min(1200px, 92%);
             margin: 0 auto;
         }
 
         section {
-            padding: 80px 0;
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: rgba(43, 148, 72, 0.10);
+            color: var(--green-mid);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 52px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        .section-title h2 .highlight {
+            background: linear-gradient(135deg, var(--green-mid), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 12px auto 0;
+            font-size: 1.05rem;
+            opacity: 0.85;
         }
 
         .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 34px;
+            border-radius: 50px;
             font-weight: 700;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             text-decoration: none;
-            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
         }
 
         .btn-primary {
-            background: var(--teal);
+            background: linear-gradient(135deg, var(--teal), #0f766e);
             color: white;
-            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3);
+            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.30);
         }
 
         .btn-primary:hover {
-            background: var(--teal-dark);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(13, 148, 136, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 14px 36px rgba(13, 148, 136, 0.40);
         }
 
-        /* Header */
+        .btn-outline {
+            border: 2px solid var(--green-mid);
+            color: var(--green-mid);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--green-mid);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(43, 148, 72, 0.25);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--green-dark);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(233, 196, 106, 0.30);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(233, 196, 106, 0.45);
+        }
+
+        /* ============================================================
+           REVEAL ANIMATIONS
+           ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-70px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(70px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .slide-left.visible,
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============================================================
+           HEADER / NAVBAR — STICKY
+           ============================================================ */
         .header {
-            position: fixed;
+            position: sticky;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 240, 0.95);
-            backdrop-filter: blur(12px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 248, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
+            height: 72px;
         }
 
         .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--teal), var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        /* ===== LOGO IMAGE – unified sizing & filters ===== */
+        .logo img,
+        .logo-sm img,
+        .footer-brand h3 img {
+            height: 70px;
+            width: auto;
+            display: block;
+            border-radius: 8px;
+            filter: brightness(0) saturate(100%) invert(58%) sepia(48%) saturate(1400%) hue-rotate(86deg) brightness(101%) contrast(101%);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo img:hover,
+        .logo-sm img:hover,
+        .footer-brand h3 img:hover {
+            filter: brightness(0) saturate(100%) invert(70%) sepia(60%) saturate(1800%) hue-rotate(80deg) brightness(105%) contrast(102%);
+            transform: scale(1.04);
+        }
+
+        /* Scrolled header – darker green for contrast */
+        .header.scrolled .logo img {
+            filter: brightness(0) saturate(100%) invert(28%) sepia(67%) saturate(400%) hue-rotate(98deg) brightness(95%) contrast(86%);
+        }
+
+        /* Mobile menu logo – keep it bright */
+        .mobile-menu .logo-sm img {
+            filter: brightness(0) saturate(100%) invert(58%) sepia(48%) saturate(1400%) hue-rotate(86deg) brightness(101%) contrast(101%);
+        }
+
+        /* Footer logo – slightly warmer gold-green */
+        .footer-brand h3 img {
+            filter: brightness(0) saturate(100%) invert(70%) sepia(50%) saturate(1200%) hue-rotate(70deg) brightness(98%) contrast(95%);
         }
 
         .nav-links {
             display: flex;
             gap: 28px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
             font-weight: 600;
-            color: var(--green-dark);
+            color: var(--text);
+            transition: color 0.25s;
             position: relative;
-            transition: color 0.3s;
+            font-size: 0.92rem;
         }
 
         .nav-links a::after {
@@ -113,47 +300,78 @@
             position: absolute;
             bottom: -4px;
             left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--teal);
-            transition: width 0.3s;
+            width: 0;
+            height: 2.5px;
+            background: linear-gradient(90deg, var(--green-mid), var(--gold));
+            border-radius: 4px;
+            transition: width 0.35s ease;
         }
 
         .nav-links a:hover {
-            color: var(--teal);
+            color: var(--green-mid);
         }
 
         .nav-links a:hover::after {
             width: 100%;
         }
 
+        .nav-links a.active {
+            color: var(--green-mid);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links .btn-login {
+            margin-left: 4px;
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
-            padding: 10px;
+            padding: 8px;
+            background: none;
+            border: none;
         }
 
         .hamburger span {
-            width: 26px;
-            height: 2px;
-            background: var(--green-dark);
-            border-radius: 2px;
+            width: 28px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 4px;
+            transition: all 0.3s;
+            transform-origin: center;
         }
 
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== MOBILE MENU ===== */
         .mobile-menu {
             position: fixed;
-            top: 70px;
+            top: 0;
             right: -100%;
             width: 300px;
-            bottom: 0;
-            background: white;
-            transition: right 0.4s ease;
-            z-index: 999;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            background: var(--white);
+            z-index: 1001;
+            transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.12);
             display: flex;
             flex-direction: column;
+            padding: 24px 28px 32px;
         }
 
         .mobile-menu.active {
@@ -162,97 +380,236 @@
 
         .mobile-menu-header {
             display: flex;
-            justify-content: flex-end;
-            padding: 15px 20px;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu-header .logo-sm {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-menu-header .logo-sm img {
+            height: 60px;
+            width: auto;
+            border-radius: 6px;
         }
 
         .close-menu {
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: var(--green-dark);
+            color: var(--text);
             cursor: pointer;
+            padding: 4px 8px;
+            transition: color 0.2s;
+        }
+
+        .close-menu:hover {
+            color: var(--green-mid);
         }
 
         .mobile-menu ul {
             list-style: none;
-            padding: 0 30px;
-            flex: 1;
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            flex: 1;
         }
 
-        .mobile-menu a {
+        .mobile-menu ul a {
             text-decoration: none;
-            font-weight: 700;
-            color: var(--green-dark);
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text);
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .mobile-login {
-            padding: 20px 30px 30px;
-            text-align: center;
-            border-top: 1px solid #e2e8f0;
+        .mobile-menu ul a:hover {
+            color: var(--green-mid);
+            transform: translateX(6px);
         }
 
-        .overlay {
+        .mobile-menu ul a i {
+            width: 24px;
+            color: var(--green-light);
+        }
+
+        .mobile-menu ul a.active {
+            color: var(--green-mid);
+        }
+
+        /* Login button inside the list – just below Contact */
+        .mobile-login-item {
+            margin-top: 8px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            list-style: none;
+        }
+
+        .mobile-login-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 14px 28px !important;
+            font-size: 1rem !important;
+            border-radius: 50px !important;
+        }
+
+        .overlay-bg {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transition: 0.3s;
-            z-index: 998;
+            transition: all 0.35s ease;
         }
 
-        .overlay.active {
+        .overlay-bg.active {
             opacity: 1;
             visibility: visible;
         }
 
+        /* ============================================================
+           BACK TO TOP
+           ============================================================ */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: var(--teal);
-            color: white;
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+            color: white;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(43, 148, 72, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 99;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-            z-index: 99;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            font-size: 1.4rem;
         }
 
         .back-to-top.show {
             opacity: 1;
             visibility: visible;
+            transform: translateY(0);
         }
 
-        /* Hero */
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(43, 148, 72, 0.4);
+        }
+
+        /* ============================================================
+           MARQUEE BANNER
+           ============================================================ */
+        .marquee-banner {
+            background: linear-gradient(90deg, var(--green-dark), #1b4332);
+            color: white;
+            padding: 12px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .marquee-content span {
+            margin-right: 48px;
+        }
+
+        .marquee-content span i {
+            margin-right: 8px;
+            color: var(--gold);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ============================================================
+           HERO — Contact
+           ============================================================ */
         .hero-contact {
             background: linear-gradient(135deg, #ccfbf1 0%, #e9f5e9 100%);
             padding: 120px 0 80px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .gradient-text {
-            background: linear-gradient(90deg, var(--teal), var(--gold));
+        .hero-contact::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: rgba(13, 148, 136, 0.06);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-contact .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-contact h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .hero-contact h1 .gradient-text {
+            background: linear-gradient(135deg, var(--teal), var(--gold));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            display: inline-block;
         }
 
-        /* Contact split layout */
+        .hero-contact p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 0 auto;
+            opacity: 0.85;
+        }
+
+        /* ============================================================
+           CONTACT GRID
+           ============================================================ */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -267,74 +624,99 @@
         }
 
         .info-card {
-            background: white;
-            border-radius: 28px;
-            padding: 30px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 30px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             display: flex;
             gap: 20px;
             align-items: center;
+            border: 1px solid transparent;
         }
 
         .info-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(13, 148, 136, 0.15);
         }
 
         .info-icon {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: var(--teal);
             background: #ccfbf1;
-            width: 60px;
-            height: 60px;
-            border-radius: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        .info-card:hover .info-icon {
+            background: var(--teal);
+            color: white;
+            transform: scale(1.05) rotate(-2deg);
         }
 
         .info-text h3 {
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+            color: var(--text);
         }
 
         .info-text p {
-            color: #2d6a4f;
-            font-size: 0.95rem;
+            color: var(--text-light);
+            font-size: 0.92rem;
+            opacity: 0.8;
+            line-height: 1.5;
         }
 
+        /* ===== FORM CARD ===== */
         .form-card {
-            background: white;
-            border-radius: 28px;
-            padding: 35px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 35px 36px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid transparent;
         }
 
         .form-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(13, 148, 136, 0.12);
         }
 
         .form-card h3 {
             font-weight: 700;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--text);
+        }
+
+        .form-card h3 i {
+            color: var(--teal);
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             font-weight: 600;
             display: block;
             margin-bottom: 6px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
+            color: var(--text);
         }
 
         .form-group input,
@@ -342,19 +724,35 @@
             width: 100%;
             padding: 12px 16px;
             border: 2px solid #e2e8f0;
-            border-radius: 16px;
+            border-radius: 14px;
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             transition: border-color 0.3s, box-shadow 0.3s;
             outline: none;
+            background: #fafbfc;
+            color: var(--text);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             border-color: var(--teal);
-            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.10);
+            background: var(--white);
         }
 
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #a0aec0;
+        }
+
+        .form-card .btn-primary {
+            width: 100%;
+            justify-content: center;
+            padding: 16px 34px;
+            font-size: 1rem;
+        }
+
+        /* ===== SOCIAL ===== */
         .social-links {
             display: flex;
             gap: 20px;
@@ -366,92 +764,172 @@
             color: var(--teal);
             font-size: 1.8rem;
             transition: transform 0.3s, color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ccfbf1;
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: var(--teal-dark);
-            transform: scale(1.2);
+            color: white;
+            background: var(--teal);
+            transform: scale(1.1) translateY(-4px);
+            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.3);
         }
 
-        /* Footer */
+        /* ============================================================
+           FOOTER
+           ============================================================ */
         .footer {
-            background: #1b4332;
-            color: #ccc;
-            padding: 60px 0 30px;
+            background: var(--green-dark);
+            color: #cbd5e1;
+            padding: 60px 0 28px;
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 40px;
-            margin-bottom: 30px;
+            margin-bottom: 36px;
         }
 
-        .footer-grid h4 {
+        .footer-brand h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand h3 img {
+            height: 36px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .footer-brand h3 span {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-brand p {
+            opacity: 0.7;
+            font-size: 0.95rem;
+            max-width: 300px;
+        }
+
+        .footer-brand .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .footer-brand .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-brand .socials a:hover {
+            background: var(--gold);
+            color: var(--green-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
             color: white;
+            font-weight: 700;
             margin-bottom: 16px;
+            font-size: 1.05rem;
         }
 
-        .footer-grid ul {
+        .footer-col ul {
             list-style: none;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .footer-grid a {
-            color: #aaa;
+        .footer-col ul a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.2s;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            display: inline-block;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--gold);
+            transform: translateX(4px);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .footer-bottom .legal-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom .legal-links a {
+            color: #cbd5e1;
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .footer-grid a:hover {
+        .footer-bottom .legal-links a:hover {
             color: var(--gold);
         }
 
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.95rem;
-        }
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
 
-        /* Animations */
-        .reveal,
-        .slide-left,
-        .slide-right {
-            will-change: transform, opacity;
-        }
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
+            section {
+                padding: 60px 0;
+            }
 
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible,
-        .slide-left.visible,
-        .slide-right.visible {
-            opacity: 1;
-            transform: translate(0);
+            .hero-contact h1 {
+                font-size: 2.8rem;
+            }
         }
 
         @media (max-width: 768px) {
-
-            .nav-links,
-            .navbar .btn-primary {
+            .nav-links {
                 display: none;
             }
 
@@ -459,214 +937,490 @@
                 display: flex;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr;
+            .section-title h2 {
+                font-size: 1.8rem;
             }
 
             .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
+            .footer-brand p {
+                max-width: 100%;
+            }
+
+            .footer-brand .socials {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .marquee-content {
+                font-size: 0.75rem;
+            }
+
+            .marquee-content span {
+                margin-right: 24px;
+            }
+
+            .back-to-top {
+                bottom: 16px;
+                right: 16px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+
+            .navbar {
+                height: 64px;
+            }
+
+            .logo img {
+                height: 90px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .hero-contact h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-contact p {
+                font-size: 1rem;
+            }
+
+            .info-card {
+                padding: 20px 22px;
+            }
+
+            .info-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.4rem;
+            }
+
+            .form-card {
+                padding: 28px 24px;
+            }
+
+            .form-card h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title p {
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .marquee-banner {
+                padding: 8px 0;
+            }
+
+            .marquee-content {
+                font-size: 0.65rem;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .hero-contact {
+                padding: 100px 0 60px;
+            }
+
+            .hero-contact h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-column {
+                gap: 16px;
+            }
+
+            .info-card {
+                padding: 16px 18px;
+                gap: 14px;
+            }
+
+            .info-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                border-radius: 12px;
+            }
+
+            .info-text h3 {
+                font-size: 0.95rem;
+            }
+
+            .info-text p {
+                font-size: 0.82rem;
+            }
+
+            .form-card {
+                padding: 20px 16px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 10px 14px;
+                font-size: 0.88rem;
+            }
+
+            .social-links a {
+                width: 46px;
+                height: 46px;
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header class="header">
+
+    <!-- ============================================================
+    HEADER — STICKY
+    ============================================================ -->
+    <header class="header" id="header">
         <nav class="navbar container">
-            <a href="index.html" class="logo">🌿 Stackly</a>
+            <a href="index.html" class="logo">
+                <img src="logo.webp" alt="Stackly Logo" />
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="features.html">Features</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="login-waste.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
             </ul>
-            <a href="login-waste.html" class="btn btn-primary">Login</a>
-            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
 
+    <!-- ============================================================
+    MOBILE MENU
+    ============================================================ -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-            <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+            <a href="index.html" class="logo-sm">
+                <img src="logo.webp" alt="Stackly Logo" />
+            </a>
+            <button class="close-menu" id="closeMenu" aria-label="Close menu"><i class="fas fa-times"></i></button>
         </div>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="features.html">Features</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li><a href="features.html"><i class="fas fa-star"></i> Features</a></li>
+            <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li class="mobile-login-item">
+                <a href="login-waste.html" class="btn btn-primary mobile-login-btn">
+                     Login
+                </a>
+            </li>
         </ul>
-        <div class="mobile-login">
-            <a href="login-waste.html" class="btn btn-primary" style="display:block; width:100%;">Login</a>
+    </div>
+    <div class="overlay-bg" id="overlayBg"></div>
+
+    <!-- ============================================================
+    MARQUEE BANNER
+    ============================================================ -->
+    <div class="marquee-banner">
+        <div class="marquee-content">
+            <span><i class="fas fa-recycle"></i> Join the green revolution</span>
+            <span><i class="fas fa-globe-americas"></i> Zero waste is our goal</span>
+            <span><i class="fas fa-chart-line"></i> Technology for sustainability</span>
+            <span><i class="fas fa-handshake"></i> Partnering with communities</span>
+            <span><i class="fas fa-seedling"></i> 2.4M+ tons recycled globally</span>
+            <span><i class="fas fa-recycle"></i> Join the green revolution</span>
+            <span><i class="fas fa-globe-americas"></i> Zero waste is our goal</span>
+            <span><i class="fas fa-chart-line"></i> Technology for sustainability</span>
+            <span><i class="fas fa-handshake"></i> Partnering with communities</span>
+            <span><i class="fas fa-seedling"></i> 2.4M+ tons recycled globally</span>
         </div>
     </div>
-    <div class="overlay" id="overlay"></div>
 
-    <main>
-        <section class="hero-contact">
-            <div class="container reveal">
-                <h1>Let's <span class="gradient-text">Connect</span></h1>
-                <p>We're here to help you build a cleaner future</p>
-            </div>
-        </section>
+    <!-- ============================================================
+    HERO — Contact
+    ============================================================ -->
+    <section class="hero-contact">
+        <div class="container reveal">
+            <h1>Let's <span class="gradient-text">Connect</span></h1>
+            <p>We're here to help you build a cleaner future</p>
+        </div>
+    </section>
 
-        <section>
-            <div class="container contact-grid">
-                <div class="info-column">
-                    <div class="info-card slide-left">
-                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="info-text">
-                            <h3>Visit Us</h3>
-                            <p>123 Green Street, Eco City, CA 94016</p>
-                        </div>
-                    </div>
-                    <div class="info-card slide-left">
-                        <div class="info-icon"><i class="fas fa-phone"></i></div>
-                        <div class="info-text">
-                            <h3>Call Us</h3>
-                            <p>+1 (888) 123-4567</p>
-                        </div>
-                    </div>
-                    <div class="info-card slide-left">
-                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                        <div class="info-text">
-                            <h3>Email Us</h3>
-                            <p>hello@stackly.com</p>
-                        </div>
-                    </div>
-                    <!-- Replaced map with working hours card -->
-                    <div class="info-card slide-left">
-                        <div class="info-icon"><i class="fas fa-clock"></i></div>
-                        <div class="info-text">
-                            <h3>Working Hours</h3>
-                            <p>Mon – Fri: 8 AM – 6 PM<br>Sat: 9 AM – 1 PM</p>
-                        </div>
+    <!-- ============================================================
+    CONTACT SECTION
+    ============================================================ -->
+    <section>
+        <div class="container contact-grid">
+            <div class="info-column">
+                <div class="info-card slide-left">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text">
+                        <h3>Visit Us</h3>
+                        <p>123 Green Street, Eco City, CA 94016</p>
                     </div>
                 </div>
-
-                <div class="form-card slide-right">
-                    <h3><i class="fas fa-paper-plane" style="color: var(--teal);"></i> Send a Message</h3>
-                    <form id="contactForm" action="404.html" method="get">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="you@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width:100%;">Send Message →</button>
-                    </form>
+                <div class="info-card slide-left">
+                    <div class="info-icon"><i class="fas fa-phone"></i></div>
+                    <div class="info-text">
+                        <h3>Call Us</h3>
+                        <p>+1 (888) 123-4567</p>
+                    </div>
+                </div>
+                <div class="info-card slide-left">
+                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text">
+                        <h3>Email Us</h3>
+                        <p>hello@stackly.com</p>
+                    </div>
+                </div>
+                <div class="info-card slide-left">
+                    <div class="info-icon"><i class="fas fa-clock"></i></div>
+                    <div class="info-text">
+                        <h3>Working Hours</h3>
+                        <p>Mon – Fri: 8 AM – 6 PM<br />Sat: 9 AM – 1 PM</p>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <section>
-            <div class="container reveal" style="text-align: center;">
-                <h2>Follow Our <span class="gradient-text">Mission</span></h2>
-                <div class="social-links">
-                    <a href="404.html" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="404.html" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="404.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div>
-                <h3 style="font-size:1.8rem; margin-bottom:10px;">🌿 Stackly</h3>
-                <p>Smart waste management for a sustainable future.</p>
-            </div>
-            <div>
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="features.html">Features</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="404.html">Documentation</a></li>
-                    <li><a href="404.html">Help Center</a></li>
-                    <li><a href="404.html">Blog</a></li>
-                    <li><a href="404.html">API</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="404.html">Privacy Policy</a></li>
-                    <li><a href="404.html">Terms of Service</a></li>
-                    <li><a href="404.html">Cookie Policy</a></li>
-                </ul>
+            <div class="form-card slide-right">
+                <h3><i class="fas fa-paper-plane"></i> Send a Message</h3>
+                <form id="contactForm" action="404.html" method="get">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your full name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="you@example.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
             </div>
         </div>
-        <div class="copyright">© 2026 Stackly. All Rights Reserved.</div>
+    </section>
+
+    <!-- ============================================================
+    SOCIAL SECTION
+    ============================================================ -->
+    <section style="background:var(--white);">
+        <div class="container reveal" style="text-align: center;">
+            <div class="section-title">
+                <span class="section-label">Stay Connected</span>
+                <h2>Follow Our <span class="highlight">Mission</span></h2>
+                <p>Join us on social media for the latest updates and sustainability tips.</p>
+            </div>
+            <div class="social-links">
+                <a href="404.html" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="404.html" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="404.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="404.html" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><img src="logo.webp" alt="Stackly Logo" /><span>Stackly</span></h3>
+                    <p>Smart waste management for a sustainable future. Empowering cities and businesses to reduce waste
+                        and increase recycling.</p>
+                    <div class="socials">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="404.html">Documentation</a></li>
+                        <li><a href="404.html">Help Center</a></li>
+                        <li><a href="404.html">API Reference</a></li>
+                        <li><a href="404.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="404.html">Privacy Policy</a></li>
+                        <li><a href="404.html">Terms of Service</a></li>
+                        <li><a href="404.html">Cookie Policy</a></li>
+                        <li><a href="404.html">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Stackly. All Rights Reserved.</span>
+                <div class="legal-links">
+                    <a href="404.html">Privacy</a>
+                    <a href="404.html">Terms</a>
+                    <a href="404.html">Cookies</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    <!-- ============================================================
+    BACK TO TOP
+    ============================================================ -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
     <script>
-        // Mobile menu
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('overlay');
-        const closeMenu = document.getElementById('closeMenu');
+        (function () {
+            'use strict';
 
-        function openMenu() {
-            mobileMenu.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            // ============================================================
+            // 1. HEADER SCROLL EFFECT
+            // ============================================================
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
 
-        function closeMenuFunc() {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            // ============================================================
+            // 2. MOBILE MENU
+            // ============================================================
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlayBg = document.getElementById('overlayBg');
+            const closeMenu = document.getElementById('closeMenu');
 
-        hamburger.addEventListener('click', openMenu);
-        overlay.addEventListener('click', closeMenuFunc);
-        closeMenu.addEventListener('click', closeMenuFunc);
+            function openMenu() {
+                mobileMenu.classList.add('active');
+                overlayBg.classList.add('active');
+                hamburger.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
 
-        // Back to top
-        const backBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            backBtn.classList.toggle('show', window.scrollY > 500);
-        });
-        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            function closeMenuFunc() {
+                mobileMenu.classList.remove('active');
+                overlayBg.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = '';
+            }
 
-        // Scroll animations
-        const animatedElements = document.querySelectorAll('.reveal, .slide-left, .slide-right');
+            hamburger.addEventListener('click', openMenu);
+            overlayBg.addEventListener('click', closeMenuFunc);
+            closeMenu.addEventListener('click', closeMenuFunc);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeMenuFunc();
+            });
 
-        if ('IntersectionObserver' in window) {
-            const observerOptions = { threshold: 0, rootMargin: '0px 0px -30px 0px' };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+            // ============================================================
+            // 3. BACK TO TOP
+            // ============================================================
+            const backBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 500) {
+                    backBtn.classList.add('show');
+                } else {
+                    backBtn.classList.remove('show');
+                }
+            });
+            backBtn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ============================================================
+            // 4. INTERSECTION OBSERVER — reveal animations
+            // ============================================================
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            };
+
+            const observerCallback = function (entries) {
+                entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            };
 
-            animatedElements.forEach(el => observer.observe(el));
-        } else {
-            animatedElements.forEach(el => el.classList.add('visible'));
-        }
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            document.querySelectorAll('.reveal, .slide-left, .slide-right, .scale-in')
+                .forEach(function (el) {
+                    observer.observe(el);
+                });
+
+            // ============================================================
+            // 5. SMOOTH ANCHOR SCROLL
+            // ============================================================
+            document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const offset = 80;
+                        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                        closeMenuFunc();
+                    }
+                });
+            });
+
+        })();
     </script>
+
 </body>
 
 </html>
