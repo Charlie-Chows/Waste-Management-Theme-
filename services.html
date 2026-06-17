@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly | Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-dark: #1b4332;
+            --green-mid: #2b9348;
+            --green-light: #40916c;
+            --gold: #e9c46a;
+            --blue-accent: #0077b6;
+            --bg-light: #f4f1de;
+            --white: #ffffff;
+            --text: #1b4332;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: min(1200px, 90%);
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--green-mid);
+            color: white;
+            box-shadow: 0 8px 20px rgba(43, 147, 72, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #1b7a3a;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(43, 147, 72, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--green-mid);
+            color: var(--green-mid);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--green-mid);
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 240, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--green-mid), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--green-dark);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--green-mid);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-mid);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2px;
+            background: var(--green-dark);
+            border-radius: 2px;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            right: -100%;
+            width: 300px;
+            bottom: 0;
+            background: white;
+            transition: right 0.4s ease;
+            z-index: 999;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px 20px;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--green-dark);
+            cursor: pointer;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            font-weight: 700;
+            color: var(--green-dark);
+            font-size: 1.1rem;
+        }
+
+        .mobile-login {
+            padding: 20px 30px 30px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--green-mid);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            font-size: 1.4rem;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero split layout */
+        .hero-services {
+            background: linear-gradient(135deg, #e9f5e9 0%, #d4e6d4 100%);
+            padding: 120px 0 80px;
+        }
+
+        .hero-split {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #2d6a4f;
+            margin-bottom: 32px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-visual .icon-collage {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .hero-visual .icon-collage div {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            font-size: 2rem;
+            color: var(--green-mid);
+            transition: transform 0.3s;
+        }
+
+        .hero-visual .icon-collage div:hover {
+            transform: scale(1.05);
+        }
+
+        /* Section titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--green-dark);
+        }
+
+        .section-title p {
+            color: var(--green-light);
+            font-size: 1.1rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--green-mid), var(--blue-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        /* Service cards - 2 columns with left colored border */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 6px solid var(--green-mid);
+        }
+
+        .service-card:nth-child(even) {
+            border-left-color: var(--blue-accent);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2.4rem;
+            color: var(--green-mid);
+            flex-shrink: 0;
+        }
+
+        .service-card h3 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            color: #2d6a4f;
+            font-size: 0.95rem;
+        }
+
+        /* Process steps */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 150px;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--green-mid);
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: var(--green-dark);
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--blue-accent);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1b4332;
+            color: #ccc;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid h4 {
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .footer-grid ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-grid a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-grid a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        .reveal,
+        .slide-left,
+        .slide-right {
+            will-change: transform, opacity;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible,
+        .slide-left.visible,
+        .slide-right.visible {
+            opacity: 1;
+            transform: translate(0);
+        }
+
+        @media (max-width: 992px) {
+            .hero-split {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .nav-links,
+            .navbar .btn-primary {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">🌿 Stackly</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="login-waste.html" class="btn btn-primary">Login</a>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mobile-login">
+            <a href="login-waste.html" class="btn btn-primary" style="display:block; width:100%;">Login</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+        <!-- Hero with split layout -->
+        <section class="hero-services">
+            <div class="container hero-split">
+                <div class="hero-text reveal">
+                    <h1>Tailored <span class="gradient-text">Waste Solutions</span></h1>
+                    <p>From smart collection to citizen engagement, we cover every stage of the waste lifecycle.</p>
+                    <a href="contact.html" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="hero-visual slide-right">
+                    <div class="icon-collage">
+                        <div>🗑️</div>
+                        <div>♻️</div>
+                        <div>📊</div>
+                        <div>📱</div>
+                        <div>🚛</div>
+                        <div>🏭</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service cards with left colored border -->
+        <section>
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>What We Offer</h2>
+                    <p>Comprehensive services designed for municipalities and businesses</p>
+                </div>
+                <div class="service-grid">
+                    <div class="service-card slide-left">
+                        <span class="service-icon">🗑️</span>
+                        <div>
+                            <h3>Collection Management</h3>
+                            <p>Smart scheduling, dynamic routing, and real‑time tracking for every collection vehicle.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="service-card slide-right">
+                        <span class="service-icon">♻️</span>
+                        <div>
+                            <h3>Recycling Programs</h3>
+                            <p>Custom recycling plans, sorting technology, and material recovery facilities.</p>
+                        </div>
+                    </div>
+                    <div class="service-card slide-left">
+                        <span class="service-icon">📊</span>
+                        <div>
+                            <h3>Analytics & Reporting</h3>
+                            <p>Real‑time dashboards for diversion rates, costs, and environmental impact.</p>
+                        </div>
+                    </div>
+                    <div class="service-card slide-right">
+                        <span class="service-icon">📱</span>
+                        <div>
+                            <h3>Citizen Engagement</h3>
+                            <p>Mobile app with pickup reminders, issue reporting, and recycling education.</p>
+                        </div>
+                    </div>
+                    <div class="service-card slide-left">
+                        <span class="service-icon">🏭</span>
+                        <div>
+                            <h3>Industrial Waste</h3>
+                            <p>Bulk waste handling, compliance reporting, and zero‑landfill strategies.</p>
+                        </div>
+                    </div>
+                    <div class="service-card slide-right">
+                        <span class="service-icon">🚛</span>
+                        <div>
+                            <h3>Fleet Optimization</h3>
+                            <p>Live vehicle tracking, maintenance alerts, and driver performance scoring.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works process -->
+        <section>
+            <div class="container reveal">
+                <div class="section-title">
+                    <h2>How We <span class="gradient-text">Deliver</span></h2>
+                </div>
+                <div class="process-steps">
+                    <div class="step slide-left">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Assessment</div>
+                    </div>
+                    <div class="step slide-right">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Deployment</div>
+                    </div>
+                    <div class="step slide-left">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Optimization</div>
+                    </div>
+                    <div class="step slide-right">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Scale</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container reveal">
+                <h2>Ready to transform your waste operations?</h2>
+                <a href="contact.html" class="btn btn-outline" style="color:white; border-color:white;">Request a
+                    Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div>
+                <h3 style="font-size:1.8rem; margin-bottom:10px;">🌿 Stackly</h3>
+                <p>Smart waste management for a sustainable future.</p>
+            </div>
+            <div>
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="404.html">Documentation</a></li>
+                    <li><a href="404.html">Help Center</a></li>
+                    <li><a href="404.html">Blog</a></li>
+                    <li><a href="404.html">API</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="404.html">Privacy Policy</a></li>
+                    <li><a href="404.html">Terms of Service</a></li>
+                    <li><a href="404.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">© 2026 Stackly. All Rights Reserved.</div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+        const closeMenu = document.getElementById('closeMenu');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenuFunc() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', openMenu);
+        overlay.addEventListener('click', closeMenuFunc);
+        closeMenu.addEventListener('click', closeMenuFunc);
+
+        // Back to top
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backBtn.classList.toggle('show', window.scrollY > 500);
+        });
+        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Scroll animations
+        const animatedElements = document.querySelectorAll('.reveal, .slide-left, .slide-right');
+
+        if ('IntersectionObserver' in window) {
+            const observerOptions = { threshold: 0, rootMargin: '0px 0px -30px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(el => observer.observe(el));
+        } else {
+            animatedElements.forEach(el => el.classList.add('visible'));
+        }
+    </script>
+</body>
+
+</html>

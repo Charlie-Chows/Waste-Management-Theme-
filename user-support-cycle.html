@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Stackly | Support Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sidebar-width: 280px;
+            --green-dark: #1b4332;
+            --green-mid: #2b9348;
+            --green-light: #40916c;
+            --gold: #e9c46a;
+            --bg-light: #f4f1de;
+            --white: #ffffff;
+            --text: #1b4332;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.1);
+            --radius: 24px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f4f1de 0%, #e9f5e9 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR (desktop) */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, #1b4332 0%, #2d6a4f 100%);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .sidebar-header {
+            padding: 28px 20px 24px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            margin: 4px 12px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-item i {
+            width: 22px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            background: rgba(233, 196, 106, 0.25);
+            color: var(--gold);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(233, 196, 106, 0.2);
+        }
+
+        .sidebar-footer {
+            padding: 20px 24px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fca5a5;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #ef4444;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 24px 32px;
+            transition: margin 0.3s;
+            min-width: 0;
+        }
+
+        /* Top bar – always horizontal */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 16px 28px;
+            border-radius: var(--radius);
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: nowrap;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .user-greeting {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: var(--green-dark);
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #2b9348, var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        /* Page title */
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--green-dark);
+        }
+
+        .page-title i {
+            color: var(--green-mid);
+        }
+
+        /* Support grid */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .support-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s, box-shadow 0.25s;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .support-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .support-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .support-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .support-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .support-card .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: #f0fdf4;
+            color: var(--green-mid);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .support-card:hover .icon-circle {
+            background: var(--green-mid);
+            color: white;
+        }
+
+        .support-card h3 {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .support-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Contact card */
+        .contact-card {
+            background: linear-gradient(135deg, #2b9348, #1b4332);
+            color: white;
+            border-radius: var(--radius);
+            padding: 36px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards 0.4s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .contact-card .contact-icon {
+            font-size: 3rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .contact-card .contact-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .contact-card .contact-link {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 24px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .contact-card .contact-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1b4332;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            z-index: 3000;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* MOBILE SIDEBAR */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1b4332 0%, #2d6a4f 100%);
+            z-index: 1000;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-sidebar.active {
+            left: 0;
+        }
+
+        .mobile-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-sidebar-header h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .overlay-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+
+        .overlay-bg.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .support-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 16px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                gap: 12px;
+                padding: 12px 16px;
+            }
+
+            .user-greeting {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Desktop Sidebar -->
+        <aside class="sidebar" id="desktopSidebar">
+            <div class="sidebar-header">
+                <h2>🌿 Stackly</h2>
+                <p style="font-size:0.8rem; opacity:0.7;">User Portal</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="user-dashboard.html" class="nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="user-requests.html" class="nav-item"><i class="fas fa-trash-alt"></i> My Requests</a>
+                <a href="user-profile-cycle.html" class="nav-item"><i class="fas fa-user-circle"></i> Profile</a>
+                <a href="user-support-cycle.html" class="nav-item active"><i class="fas fa-headset"></i> Support</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="logout-btn" id="desktopLogout"><i class="fas fa-sign-out-alt"></i> Logout</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
+                <div class="user-greeting">
+                    <span>Hello, <strong id="greetingName">User</strong> 👋</span>
+                    <div class="user-avatar" id="userAvatar">U</div>
+                </div>
+            </div>
+
+            <div class="page-title">
+                <i class="fas fa-headset"></i> Support Center
+            </div>
+
+            <div class="support-grid">
+                <div class="support-card" onclick="showToast('Opening FAQ')">
+                    <div class="icon-circle"><i class="fas fa-question-circle"></i></div>
+                    <h3>FAQ</h3>
+                    <p>Common questions about recycling & pickups</p>
+                </div>
+                <div class="support-card" onclick="showToast('Opening waste sorting guide ')">
+                    <div class="icon-circle"><i class="fas fa-book"></i></div>
+                    <h3>Waste Guide</h3>
+                    <p>Learn what goes where</p>
+                </div>
+                <div class="support-card" onclick="showToast('Live chat is not available')">
+                    <div class="icon-circle"><i class="fas fa-comments"></i></div>
+                    <h3>Live Chat</h3>
+                    <p>Talk to a recycling specialist</p>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h3>Still need help?</h3>
+                <p>Our team is here to assist you with any questions about recycling, pickups, or your account.</p>
+                <div class="contact-links">
+                    <a href="404.html" class="contact-link"><i class="fas fa-envelope"></i>
+                        support@Stackly.com</a>
+                    <a href="404.html" class="contact-link"><i class="fas fa-phone"></i> +1 (888) 123-4567</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <h2>🌿 Stackly</h2>
+            <button class="close-sidebar" id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="sidebar-nav" style="margin-top:0;">
+            <a href="user-dashboard.html" class="nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="user-requests.html" class="nav-item"><i class="fas fa-trash-alt"></i> My Requests</a>
+            <a href="user-profile-cycle.html" class="nav-item"><i class="fas fa-user-circle"></i> Profile</a>
+            <a href="user-support-cycle.html" class="nav-item active"><i class="fas fa-headset"></i> Support</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="logout-btn" id="mobileLogout"><i class="fas fa-sign-out-alt"></i> Logout</div>
+        </div>
+    </div>
+    <div class="overlay-bg" id="overlayBg"></div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // User data
+        const userName = localStorage.getItem('stackly_username') || 'User';
+        const displayName = userName.charAt(0).toUpperCase() + userName.slice(1);
+        document.getElementById('greetingName').innerText = displayName;
+        document.getElementById('userAvatar').innerText = userName.charAt(0).toUpperCase();
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('stackly_username');
+            window.location.href = 'index.html';
+        }
+        document.getElementById('desktopLogout').addEventListener('click', logout);
+        document.getElementById('mobileLogout').addEventListener('click', logout);
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburgerBtn');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const overlayBg = document.getElementById('overlayBg');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        hamburger.addEventListener('click', () => {
+            mobileSidebar.classList.add('active');
+            overlayBg.classList.add('active');
+        });
+        closeSidebar.addEventListener('click', () => {
+            mobileSidebar.classList.remove('active');
+            overlayBg.classList.remove('active');
+        });
+        overlayBg.addEventListener('click', () => {
+            mobileSidebar.classList.remove('active');
+            overlayBg.classList.remove('active');
+        });
+
+        // Toast function
+        window.showToast = function (message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        };
+    </script>
+</body>
+
+</html>

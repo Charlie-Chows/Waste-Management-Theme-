@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Stackly | Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================================
+                   BASE & RESET
+                   ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sidebar-width: 280px;
+            --green-dark: #1b4332;
+            --green-mid: #2b9348;
+            --green-light: #40916c;
+            --gold: #e9c46a;
+            --gold-dark: #d4a84b;
+            --bg-light: #f4f1de;
+            --white: #ffffff;
+            --text: #1b4332;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.1);
+            --radius: 24px;
+            --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f4f1de 0%, #e9f5e9 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+                   DASHBOARD LAYOUT
+                   ============================================================ */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, #0f2b1f 0%, #1b4332 100%);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .sidebar-header {
+            padding: 28px 20px 24px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            color: #ccc;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            margin: 4px 12px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-item i {
+            width: 22px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--gold);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(233, 196, 106, 0.15);
+        }
+
+        .sidebar-footer {
+            padding: 20px 24px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fca5a5;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #ef4444;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 24px 32px 48px;
+            transition: margin 0.3s;
+            min-width: 0;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 14px 28px;
+            border-radius: var(--radius);
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: nowrap;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text);
+            flex-shrink: 0;
+            padding: 4px 8px;
+        }
+
+        .user-greeting {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: var(--green-dark);
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-greeting span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #2b9348, var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+                   HERO BANNER
+                   ============================================================ */
+        .settings-hero {
+            background: linear-gradient(135deg, #0f2b1f, #1b4332 60%, #2d6a4f);
+            color: white;
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroFadeIn 0.9s ease forwards 0.1s;
+        }
+
+        .settings-hero::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: rgba(233, 196, 106, 0.06);
+            border-radius: 50%;
+        }
+
+        .settings-hero::before {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 280px;
+            height: 280px;
+            background: rgba(43, 148, 72, 0.10);
+            border-radius: 50%;
+        }
+
+        .settings-hero>div {
+            position: relative;
+            z-index: 1;
+        }
+
+        .settings-hero h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .settings-hero h2 i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+
+        .settings-hero p {
+            opacity: 0.85;
+            margin-top: 6px;
+            font-size: 1.05rem;
+        }
+
+        .hero-icon-big {
+            font-size: 5rem;
+            opacity: 0.12;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================================
+                   SETTINGS GRID
+                   ============================================================ */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 28px 30px;
+            box-shadow: var(--shadow-sm);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease, box-shadow 0.3s;
+            will-change: transform, opacity;
+            border-top: 5px solid var(--green-mid);
+        }
+
+        .settings-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .settings-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .settings-card:nth-child(1) {
+            border-top-color: #f59e0b;
+        }
+
+        .settings-card:nth-child(2) {
+            border-top-color: #3b82f6;
+        }
+
+        .settings-card:nth-child(3) {
+            border-top-color: #8b5cf6;
+        }
+
+        .settings-card:nth-child(4) {
+            border-top-color: #ec4899;
+        }
+
+        .settings-card:nth-child(5) {
+            border-top-color: #14b8a6;
+        }
+
+        .settings-card:nth-child(6) {
+            border-top-color: #f59e0b;
+        }
+
+        .settings-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .settings-card .card-header .icon-wrap {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .settings-card:nth-child(1) .icon-wrap {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        .settings-card:nth-child(2) .icon-wrap {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        }
+
+        .settings-card:nth-child(3) .icon-wrap {
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+        }
+
+        .settings-card:nth-child(4) .icon-wrap {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+        }
+
+        .settings-card:nth-child(5) .icon-wrap {
+            background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+        }
+
+        .settings-card:nth-child(6) .icon-wrap {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        .settings-card .card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .settings-card .card-header .sub {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-weight: 400;
+            display: block;
+        }
+
+        /* ===== SETTING ITEM ===== */
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item .info {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .setting-item .info .label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .setting-item .info .label i {
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        .setting-item .info .desc {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin-top: 1px;
+        }
+
+        /* ===== TOGGLE SWITCH ===== */
+        .toggle {
+            width: 48px;
+            height: 28px;
+            background: #cbd5e1;
+            border-radius: 40px;
+            cursor: pointer;
+            position: relative;
+            transition: 0.3s;
+            flex-shrink: 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .toggle.active {
+            background: #2b9348;
+        }
+
+        .toggle::after {
+            content: '';
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .toggle.active::after {
+            left: 23px;
+        }
+
+        /* ===== SELECT / INPUT ===== */
+        .setting-select {
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 1.5px solid #e2e8f0;
+            background: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.25s;
+            min-width: 130px;
+        }
+
+        .setting-select:focus {
+            outline: none;
+            border-color: var(--green-mid);
+            box-shadow: 0 0 0 3px rgba(43, 148, 72, 0.12);
+        }
+
+        .setting-select:hover {
+            border-color: var(--green-mid);
+        }
+
+        .color-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-options .color-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.25s;
+            flex-shrink: 0;
+        }
+
+        .color-options .color-dot:hover {
+            transform: scale(1.1);
+        }
+
+        .color-options .color-dot.active {
+            border-color: var(--text);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--text);
+        }
+
+        /* ===== FULL WIDTH CARD ===== */
+        .settings-card-full {
+            grid-column: 1 / -1;
+        }
+
+        /* ============================================================
+                   MOBILE SIDEBAR
+                   ============================================================ */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, #0f2b1f 0%, #1b4332 100%);
+            z-index: 1000;
+            transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-sidebar.active {
+            left: 0;
+        }
+
+        .mobile-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-sidebar-header h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .overlay-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        .overlay-bg.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1100px) {
+            .settings-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 16px 16px 32px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .settings-card {
+                padding: 20px 22px;
+            }
+
+            .settings-hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px 20px;
+            }
+
+            .settings-hero h2 {
+                font-size: 1.6rem;
+            }
+
+            .hero-icon-big {
+                display: none;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .setting-item .info .label {
+                font-size: 0.85rem;
+            }
+
+            .setting-item .info .desc {
+                font-size: 0.72rem;
+            }
+
+            .toggle {
+                align-self: flex-start;
+            }
+
+            .setting-select {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .color-options {
+                justify-content: flex-start;
+            }
+
+            .top-bar {
+                padding: 10px 16px;
+            }
+
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 0.8rem;
+            }
+
+            .user-greeting {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .settings-hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .settings-hero p {
+                font-size: 0.9rem;
+            }
+
+            .settings-card {
+                padding: 16px 18px;
+            }
+
+            .settings-card .card-header h3 {
+                font-size: 1rem;
+            }
+
+            .settings-card .card-header .icon-wrap {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .color-options .color-dot {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .settings-hero {
+                padding: 18px 14px;
+            }
+
+            .settings-hero h2 {
+                font-size: 1.1rem;
+            }
+
+            .settings-card {
+                padding: 14px;
+            }
+
+            .setting-item .info .label {
+                font-size: 0.8rem;
+            }
+
+            .toggle {
+                width: 40px;
+                height: 24px;
+            }
+
+            .toggle::after {
+                width: 18px;
+                height: 18px;
+                top: 3px;
+                left: 3px;
+            }
+
+            .toggle.active::after {
+                left: 19px;
+            }
+        }
+
+        /* ===== SAVE BUTTON ===== */
+        .save-section {
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #2b9348, #40916c);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(43, 148, 72, 0.3);
+        }
+
+        .btn-save:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(43, 148, 72, 0.4);
+        }
+
+        .btn-save i {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 860px) {
+            .save-section {
+                text-align: center;
+            }
+
+            .btn-save {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+            }
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1b4332;
+            color: white;
+            padding: 16px 28px;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+            border-left: 5px solid var(--gold);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        @media (max-width: 520px) {
+            .toast {
+                bottom: 16px;
+                right: 16px;
+                left: 16px;
+                padding: 14px 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- ===== DESKTOP SIDEBAR ===== -->
+        <aside class="sidebar" id="desktopSidebar">
+            <div class="sidebar-header">
+                <h2>🌿 Stackly</h2>
+                <p>Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="admin-collections.html" class="nav-item"><i class="fas fa-trash-alt"></i> Collections</a>
+                <a href="admin-analytics-waste.html" class="nav-item"><i class="fas fa-chart-line"></i> Analytics</a>
+                <a href="admin-settings-waste.html" class="nav-item active"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="logout-btn" id="desktopLogout"><i class="fas fa-sign-out-alt"></i> Logout</div>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="user-greeting">
+                    <span>Hello, <strong id="greetingName">Admin</strong> 👋</span>
+                    <div class="user-avatar" id="userAvatar">A</div>
+                </div>
+            </div>
+
+            <!-- HERO BANNER -->
+            <div class="settings-hero">
+                <div>
+                    <h2><i class="fas fa-sliders"></i> System Settings</h2>
+                    <p>Configure your Stackly admin experience</p>
+                </div>
+                <div class="hero-icon-big"><i class="fas fa-cog fa-spin"></i></div>
+            </div>
+
+            <!-- SETTINGS GRID -->
+            <div class="settings-grid" id="settingsGrid">
+
+                <!-- Card 1: Profile -->
+                <div class="settings-card" data-delay="0">
+                    <div class="card-header">
+                        <div class="icon-wrap"><i class="fas fa-user"></i></div>
+                        <div>
+                            <h3>Profile <span class="sub">Manage your account</span></h3>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-user-circle"></i> Display Name</div>
+                            <div class="desc">How you appear across the platform</div>
+                        </div>
+                        <input type="text" value="Admin User"
+                            style="padding:8px 16px;border-radius:12px;border:1.5px solid #e2e8f0;font-family:'Inter',sans-serif;font-size:0.85rem;background:#f8fafc;min-width:160px;flex-shrink:0;" />
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-envelope"></i> Email Address</div>
+                            <div class="desc">Used for notifications and recovery</div>
+                        </div>
+                        <input type="email" value="admin@Stackly.com"
+                            style="padding:8px 16px;border-radius:12px;border:1.5px solid #e2e8f0;font-family:'Inter',sans-serif;font-size:0.85rem;background:#f8fafc;min-width:180px;flex-shrink:0;" />
+                    </div>
+                </div>
+
+                <!-- Card 2: Notifications -->
+                <div class="settings-card" data-delay="100">
+                    <div class="card-header">
+                        <div class="icon-wrap"><i class="fas fa-bell"></i></div>
+                        <div>
+                            <h3>Notifications <span class="sub">Choose what you get</span></h3>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-envelope"></i> Email Alerts</div>
+                            <div class="desc">New collections &amp; route updates</div>
+                        </div>
+                        <div class="toggle active" data-setting="email"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-sms"></i> SMS Notifications</div>
+                            <div class="desc">Critical route changes &amp; delays</div>
+                        </div>
+                        <div class="toggle" data-setting="sms"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-browser"></i> In‑App Alerts</div>
+                            <div class="desc">Dashboard notifications &amp; reminders</div>
+                        </div>
+                        <div class="toggle active" data-setting="inapp"></div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Appearance -->
+                <div class="settings-card" data-delay="150">
+                    <div class="card-header">
+                        <div class="icon-wrap"><i class="fas fa-palette"></i></div>
+                        <div>
+                            <h3>Appearance <span class="sub">Customize your view</span></h3>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-moon"></i> Dark Mode</div>
+                            <div class="desc">Switch between light and dark theme</div>
+                        </div>
+                        <div class="toggle" data-setting="darkmode"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-paint-brush"></i> Accent Color</div>
+                            <div class="desc">Choose your primary brand color</div>
+                        </div>
+                        <div class="color-options">
+                            <span class="color-dot active" style="background:#2b9348;" data-color="#2b9348"></span>
+                            <span class="color-dot" style="background:#f59e0b;" data-color="#f59e0b"></span>
+                            <span class="color-dot" style="background:#3b82f6;" data-color="#3b82f6"></span>
+                            <span class="color-dot" style="background:#8b5cf6;" data-color="#8b5cf6"></span>
+                            <span class="color-dot" style="background:#ec4899;" data-color="#ec4899"></span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-font"></i> Font Size</div>
+                            <div class="desc">Adjust text size for readability</div>
+                        </div>
+                        <select class="setting-select">
+                            <option>Small</option>
+                            <option selected>Medium</option>
+                            <option>Large</option>
+                            <option>Extra Large</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Card 4: System -->
+                <div class="settings-card" data-delay="200">
+                    <div class="card-header">
+                        <div class="icon-wrap"><i class="fas fa-server"></i></div>
+                        <div>
+                            <h3>System <span class="sub">Core platform settings</span></h3>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-database"></i> Auto Backup</div>
+                            <div class="desc">Daily automatic data backup at 2:00 AM</div>
+                        </div>
+                        <div class="toggle active" data-setting="backup"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-shield"></i> Two‑Factor Auth</div>
+                            <div class="desc">Require 2FA for admin logins</div>
+                        </div>
+                        <div class="toggle" data-setting="2fa"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-clock"></i> Time Zone</div>
+                            <div class="desc">All timestamps use this timezone</div>
+                        </div>
+                        <select class="setting-select">
+                            <option selected>UTC (GMT+0)</option>
+                            <option>EST (GMT-5)</option>
+                            <option>PST (GMT-8)</option>
+                            <option>IST (GMT+5:30)</option>
+                            <option>AEST (GMT+10)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Card 5: Integrations -->
+                <div class="settings-card" data-delay="250">
+                    <div class="card-header">
+                        <div class="icon-wrap"><i class="fas fa-plug"></i></div>
+                        <div>
+                            <h3>Integrations <span class="sub">Connect external services</span></h3>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fab fa-slack"></i> Slack</div>
+                            <div class="desc">Receive alerts in your Slack workspace</div>
+                        </div>
+                        <div class="toggle" data-setting="slack"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fab fa-google"></i> Google Drive</div>
+                            <div class="desc">Auto‑export reports to Drive</div>
+                        </div>
+                        <div class="toggle active" data-setting="gdrive"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-cloud"></i> AWS S3</div>
+                            <div class="desc">Backup data to S3 bucket</div>
+                        </div>
+                        <div class="toggle" data-setting="aws"></div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Security -->
+                <div class="settings-card" data-delay="300">
+                    <div class="card-header">
+                        <div class="icon-wrap"><i class="fas fa-lock"></i></div>
+                        <div>
+                            <h3>Security <span class="sub">Protect your account</span></h3>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-key"></i> Change Password</div>
+                            <div class="desc">Update your login credentials</div>
+                        </div>
+                        <button
+                            style="padding:8px 20px;border-radius:12px;border:1.5px solid #e2e8f0;background:transparent;font-family:'Inter',sans-serif;font-weight:600;font-size:0.8rem;color:var(--text);cursor:pointer;transition:all 0.25s;"
+                            onmouseover="this.style.borderColor='#2b9348';this.style.background='#f0fdf4'"
+                            onmouseout="this.style.borderColor='#e2e8f0';this.style.background='transparent'">Update</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-history"></i> Session Timeout</div>
+                            <div class="desc">Auto‑logout after inactivity</div>
+                        </div>
+                        <select class="setting-select">
+                            <option>15 minutes</option>
+                            <option selected>30 minutes</option>
+                            <option>1 hour</option>
+                            <option>2 hours</option>
+                            <option>Never</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div class="info">
+                            <div class="label"><i class="fas fa-eye"></i> Audit Log</div>
+                            <div class="desc">Track all admin actions</div>
+                        </div>
+                        <div class="toggle active" data-setting="audit"></div>
+                    </div>
+                </div>
+
+                <!-- Save Button (full width) -->
+                <div class="settings-card settings-card-full" data-delay="350" style="border-top-color:#2b9348;">
+                    <div class="save-section">
+                        <button class="btn-save" id="saveBtn"><i class="fas fa-check-circle"></i> Save All
+                            Settings</button>
+                    </div>
+                    <div style="margin-top:12px;font-size:0.75rem;color:#94a3b8;text-align:center;">
+                        <i class="fas fa-shield-alt"></i> All changes are securely encrypted
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ===== MOBILE SIDEBAR ===== -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-sidebar-header">
+            <h2>🌿 Stackly</h2>
+            <button class="close-sidebar" id="closeSidebar" aria-label="Close menu"><i
+                    class="fas fa-times"></i></button>
+        </div>
+        <nav class="sidebar-nav" style="margin-top:0;">
+            <a href="admin-dashboard.html" class="nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="admin-collections.html" class="nav-item"><i class="fas fa-trash-alt"></i> Collections</a>
+            <a href="admin-analytics-waste.html" class="nav-item"><i class="fas fa-chart-line"></i> Analytics</a>
+            <a href="admin-settings-waste.html" class="nav-item active"><i class="fas fa-cog"></i> Settings</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="logout-btn" id="mobileLogout"><i class="fas fa-sign-out-alt"></i> Logout</div>
+        </div>
+    </div>
+    <div class="overlay-bg" id="overlayBg"></div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Settings saved successfully!</span>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // ============================================================
+            // 1. USER GREETING & LOGOUT
+            // ============================================================
+            const userName = localStorage.getItem('stackly_username') || 'Admin';
+            const displayName = userName.charAt(0).toUpperCase() + userName.slice(1);
+            document.getElementById('greetingName').textContent = displayName;
+            document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+
+            function handleLogout() {
+                localStorage.removeItem('stackly_username');
+                window.location.href = 'index.html';
+            }
+            document.getElementById('desktopLogout').addEventListener('click', handleLogout);
+            document.getElementById('mobileLogout').addEventListener('click', handleLogout);
+
+            // ============================================================
+            // 2. MOBILE SIDEBAR
+            // ============================================================
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileSidebar = document.getElementById('mobileSidebar');
+            const overlayBg = document.getElementById('overlayBg');
+            const closeSidebar = document.getElementById('closeSidebar');
+
+            function openMobile() {
+                mobileSidebar.classList.add('active');
+                overlayBg.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobile() {
+                mobileSidebar.classList.remove('active');
+                overlayBg.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            hamburger.addEventListener('click', openMobile);
+            closeSidebar.addEventListener('click', closeMobile);
+            overlayBg.addEventListener('click', closeMobile);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeMobile();
+            });
+
+            // ============================================================
+            // 3. INTERSECTION OBSERVER — scroll animations
+            // ============================================================
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        let delay = parseInt(el.getAttribute('data-delay')) || 0;
+                        setTimeout(function () {
+                            el.classList.add('animate-in');
+                        }, delay);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            document.querySelectorAll('.settings-card').forEach(function (card) {
+                observer.observe(card);
+            });
+
+            // Fallback for cards already visible
+            setTimeout(function () {
+                document.querySelectorAll('.settings-card:not(.animate-in)').forEach(function (card) {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) {
+                        let delay = parseInt(card.getAttribute('data-delay')) || 0;
+                        setTimeout(function () { card.classList.add('animate-in'); }, delay);
+                    }
+                });
+            }, 300);
+
+            // ============================================================
+            // 4. TOGGLE SWITCHES
+            // ============================================================
+            document.querySelectorAll('.toggle').forEach(function (toggle) {
+                toggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                    const setting = this.dataset.setting || 'unknown';
+                    const isActive = this.classList.contains('active');
+                    showToast(
+                        `${setting.charAt(0).toUpperCase() + setting.slice(1)} ${isActive ? 'enabled' : 'disabled'}`,
+                        'info'
+                    );
+                });
+            });
+
+            // ============================================================
+            // 5. COLOR DOTS
+            // ============================================================
+            document.querySelectorAll('.color-dot').forEach(function (dot) {
+                dot.addEventListener('click', function () {
+                    const parent = this.closest('.color-options');
+                    parent.querySelectorAll('.color-dot').forEach(function (d) {
+                        d.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    const color = this.dataset.color || '#2b9348';
+                    showToast(`Accent color changed to ${color}`, 'info');
+                });
+            });
+
+            // ============================================================
+            // 6. SAVE BUTTON
+            // ============================================================
+            document.getElementById('saveBtn').addEventListener('click', function () {
+                showToast('All settings saved successfully! ✨', 'success');
+                // Visual feedback
+                this.innerHTML = '<i class="fas fa-check-circle"></i> Saved!';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check-circle"></i> Save All Settings';
+                }, 2000);
+            });
+
+            // ============================================================
+            // 7. TOAST SYSTEM
+            // ============================================================
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            let toastTimeout;
+
+            function showToast(message, type) {
+                toastMessage.textContent = message;
+                toast.className = 'toast show';
+                if (type === 'success') {
+                    toast.style.borderLeftColor = '#2b9348';
+                    toast.querySelector('i').style.color = '#2b9348';
+                } else {
+                    toast.style.borderLeftColor = 'var(--gold)';
+                    toast.querySelector('i').style.color = 'var(--gold)';
+                }
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(function () {
+                    toast.classList.remove('show');
+                }, 2500);
+            }
+
+            // ============================================================
+            // 8. RE-ANIMATE on orientation change
+            // ============================================================
+            window.addEventListener('orientationchange', function () {
+                setTimeout(function () {
+                    document.querySelectorAll('.settings-card:not(.animate-in)').forEach(function (card) {
+                        const rect = card.getBoundingClientRect();
+                        if (rect.top < window.innerHeight) {
+                            let delay = parseInt(card.getAttribute('data-delay')) || 0;
+                            setTimeout(function () { card.classList.add('animate-in'); }, delay);
+                        }
+                    });
+                }, 400);
+            });
+
+            // ============================================================
+            // 9. SELECT & INPUT change handlers (show toast)
+            // ============================================================
+            document.querySelectorAll('.setting-select, input[type="text"], input[type="email"]').forEach(function (el) {
+                el.addEventListener('change', function () {
+                    showToast('Setting updated', 'info');
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>

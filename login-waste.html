@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-dark: #1b4332;
+            --green-mid: #2b9348;
+            --green-light: #40916c;
+            --gold: #e9c46a;
+            --teal: #0d9488;
+            --bg-light: #f4f1de;
+            --white: #ffffff;
+            --text: #1b4332;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1600&auto=format') center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(27, 67, 50, 0.75), rgba(13, 148, 136, 0.65));
+            backdrop-filter: blur(6px);
+            z-index: 0;
+        }
+
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 36px;
+            padding: 44px 40px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            animation: cardFloat 0.8s ease-out;
+        }
+
+        @keyframes cardFloat {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2b9348, #e9c46a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            color: #2d6a4f;
+            font-weight: 500;
+            margin-top: 8px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            color: #1b4332;
+            font-size: 0.9rem;
+        }
+
+        input,
+        .custom-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+            outline: none;
+            color: #1b4332;
+        }
+
+        input:focus {
+            border-color: #2b9348;
+            box-shadow: 0 0 0 4px rgba(43, 147, 72, 0.15);
+            background: white;
+        }
+
+        /* Custom Dropdown */
+        .custom-select {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .custom-select.active {
+            border-color: #2b9348;
+            box-shadow: 0 0 0 4px rgba(43, 147, 72, 0.15);
+            background: white;
+        }
+
+        .custom-select .arrow {
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+
+        .custom-select.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .options {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+        }
+
+        .custom-select.active .options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .option {
+            padding: 14px 16px;
+            font-weight: 500;
+            color: #1b4332;
+            transition: background 0.2s;
+        }
+
+        .option:hover {
+            background: #f0fdf4;
+            color: #2b9348;
+        }
+
+        .option.selected {
+            background: #f0fdf4;
+            font-weight: 700;
+            color: #2b9348;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2b9348, #1b7a3a);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(43, 147, 72, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(43, 147, 72, 0.4);
+            background: linear-gradient(135deg, #1b7a3a, #166534);
+        }
+
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0 16px;
+            font-size: 0.9rem;
+        }
+
+        .auth-links a {
+            color: #2b9348;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .auth-links a:hover {
+            color: #1b4332;
+            text-decoration: underline;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            color: #1b4332;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background: #f0fdf4;
+            border-color: #2b9348;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .signup-prompt {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.95rem;
+            color: #2d6a4f;
+        }
+
+        .signup-prompt a {
+            color: #2b9348;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .signup-prompt a:hover {
+            color: #1b4332;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 550px) {
+            .auth-card {
+                padding: 30px 24px;
+                border-radius: 28px;
+            }
+
+            .logo h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-card">
+        <div class="logo">
+            <h2>🌿 Stackly</h2>
+            <p>Sign in to your account</p>
+        </div>
+        <form id="loginForm">
+            <div class="input-group">
+                <label><i class="fas fa-envelope" style="margin-right:6px; color:#2b9348;"></i>Email</label>
+                <input type="email" id="email" placeholder="admin@Stackly.com" required>
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-lock" style="margin-right:6px; color:#2b9348;"></i>Password</label>
+                <input type="password" id="password" placeholder="••••••" required>
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-user-tag" style="margin-right:6px; color:#2b9348;"></i>Role</label>
+                <div class="custom-select" id="roleSelect">
+                    <span class="selected-text">Admin</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                    <div class="options">
+                        <div class="option selected" data-value="admin">Admin</div>
+                        <div class="option" data-value="user">User</div>
+                    </div>
+                </div>
+                <!-- Hidden input to hold the selected value -->
+                <input type="hidden" id="role" value="admin">
+            </div>
+            <button type="submit" class="btn-primary">Sign In <i class="fas fa-arrow-right"
+                    style="margin-left:8px;"></i></button>
+            <div class="auth-links">
+                <a href="404.html">Forgot password?</a>
+
+            </div>
+        </form>
+        <div class="social-login">
+            <a href="404.html" class="social-btn"><i class="fab fa-google"></i> Google</a>
+            <a href="404.html" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+        <div class="signup-prompt">New to Stackly? <a href="signup-waste.html">Sign up free</a></div>
+    </div>
+
+    <script>
+        // Custom dropdown logic
+        const roleSelect = document.getElementById('roleSelect');
+        const selectedText = roleSelect.querySelector('.selected-text');
+        const optionsContainer = roleSelect.querySelector('.options');
+        const options = roleSelect.querySelectorAll('.option');
+        const hiddenRoleInput = document.getElementById('role');
+
+        // Toggle dropdown
+        roleSelect.addEventListener('click', (e) => {
+            e.stopPropagation();
+            roleSelect.classList.toggle('active');
+        });
+
+        // Select an option
+        options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const value = option.dataset.value;
+                hiddenRoleInput.value = value;
+                selectedText.textContent = option.textContent;
+
+                // Update selected class
+                options.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+
+                roleSelect.classList.remove('active');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            roleSelect.classList.remove('active');
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const role = hiddenRoleInput.value;
+            const userName = document.getElementById('email').value.split('@')[0];
+            localStorage.setItem('stackly_username', userName);
+            window.location.href = role === 'admin' ? 'admin-dashboard.html' : 'user-dashboard.html';
+        });
+    </script>
+</body>
+
+</html>
