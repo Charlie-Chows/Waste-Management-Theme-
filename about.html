@@ -2,14 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Stackly | About Us</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* ============================================================
+           BASE & RESET
+           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -17,112 +21,276 @@
         }
 
         :root {
-            --green-dark: #1b4332;
+            --green-dark: #0f2b1f;
             --green-mid: #2b9348;
             --green-light: #40916c;
             --gold: #e9c46a;
-            --bg-light: #f4f1de;
+            --gold-dark: #d4a84b;
+            --gold-light: #f4d98c;
+            --bg-cream: #faf8f0;
             --white: #ffffff;
             --text: #1b4332;
+            --text-light: #2d6a4f;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
+            --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.14);
+            --radius: 28px;
+            --radius-sm: 16px;
+            --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-light);
+            background: var(--bg-cream);
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
         .container {
-            width: min(1200px, 90%);
+            width: min(1200px, 92%);
             margin: 0 auto;
         }
 
         section {
-            padding: 80px 0;
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: rgba(43, 148, 72, 0.10);
+            color: var(--green-mid);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 52px;
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
-            margin-bottom: 16px;
-            color: var(--green-dark);
+            line-height: 1.2;
+            color: var(--text);
         }
 
-        .section-title p {
-            color: var(--green-light);
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 40px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: var(--green-mid);
-            color: white;
-            box-shadow: 0 8px 20px rgba(43, 147, 72, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: #1b7a3a;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(43, 147, 72, 0.4);
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 240, 0.95);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
+        .section-title h2 .highlight {
             background: linear-gradient(135deg, var(--green-mid), var(--gold));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
+        .section-title p {
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 12px auto 0;
+            font-size: 1.05rem;
+            opacity: 0.85;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 34px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+            color: white;
+            box-shadow: 0 8px 24px rgba(43, 148, 72, 0.30);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 14px 36px rgba(43, 148, 72, 0.40);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--green-mid);
+            color: var(--green-mid);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--green-mid);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(43, 148, 72, 0.25);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--green-dark);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(233, 196, 106, 0.30);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(233, 196, 106, 0.45);
+        }
+
+        /* ============================================================
+           REVEAL ANIMATIONS
+           ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-70px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(70px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .slide-left.visible,
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============================================================
+           HEADER / NAVBAR — STICKY
+           ============================================================ */
+        .header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 248, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        /* ===== LOGO IMAGE – unified sizing & filters ===== */
+        .logo img,
+        .logo-sm img,
+        .footer-brand h3 img {
+            height: 70px;
+            width: auto;
+            display: block;
+            border-radius: 8px;
+            filter: brightness(0) saturate(100%) invert(58%) sepia(48%) saturate(1400%) hue-rotate(86deg) brightness(101%) contrast(101%);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo img:hover,
+        .logo-sm img:hover,
+        .footer-brand h3 img:hover {
+            filter: brightness(0) saturate(100%) invert(70%) sepia(60%) saturate(1800%) hue-rotate(80deg) brightness(105%) contrast(102%);
+            transform: scale(1.04);
+        }
+
+        /* Scrolled header – darker green for contrast */
+        .header.scrolled .logo img {
+            filter: brightness(0) saturate(100%) invert(28%) sepia(67%) saturate(400%) hue-rotate(98deg) brightness(95%) contrast(86%);
+        }
+
+        /* Mobile menu logo – keep it bright */
+        .mobile-menu .logo-sm img {
+            filter: brightness(0) saturate(100%) invert(58%) sepia(48%) saturate(1400%) hue-rotate(86deg) brightness(101%) contrast(101%);
+        }
+
+        /* Footer logo – slightly warmer gold-green */
+        .footer-brand h3 img {
+            filter: brightness(0) saturate(100%) invert(70%) sepia(50%) saturate(1200%) hue-rotate(70deg) brightness(98%) contrast(95%);
+        }
+
         .nav-links {
             display: flex;
             gap: 28px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
             font-weight: 600;
-            color: var(--green-dark);
+            color: var(--text);
+            transition: color 0.25s;
             position: relative;
-            transition: color 0.3s;
+            font-size: 0.92rem;
         }
 
         .nav-links a::after {
@@ -130,10 +298,11 @@
             position: absolute;
             bottom: -4px;
             left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--green-mid);
-            transition: width 0.3s;
+            width: 0;
+            height: 2.5px;
+            background: linear-gradient(90deg, var(--green-mid), var(--gold));
+            border-radius: 4px;
+            transition: width 0.35s ease;
         }
 
         .nav-links a:hover {
@@ -144,33 +313,63 @@
             width: 100%;
         }
 
+        .nav-links a.active {
+            color: var(--green-mid);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links .btn-login {
+            margin-left: 4px;
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
-            padding: 10px;
+            padding: 8px;
+            background: none;
+            border: none;
         }
 
         .hamburger span {
-            width: 26px;
-            height: 2px;
-            background: var(--green-dark);
-            border-radius: 2px;
+            width: 28px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 4px;
+            transition: all 0.3s;
+            transform-origin: center;
         }
 
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== MOBILE MENU ===== */
         .mobile-menu {
             position: fixed;
-            top: 70px;
+            top: 0;
             right: -100%;
             width: 300px;
-            bottom: 0;
-            background: white;
-            transition: right 0.4s ease;
-            z-index: 999;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            background: var(--white);
+            z-index: 1001;
+            transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.12);
             display: flex;
             flex-direction: column;
+            padding: 24px 28px 32px;
         }
 
         .mobile-menu.active {
@@ -179,16 +378,32 @@
 
         .mobile-menu-header {
             display: flex;
-            justify-content: flex-end;
-            padding: 15px 20px;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu-header .logo-sm {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-menu-header .logo-sm img {
+            height: 60px;
+            width: auto;
+            border-radius: 6px;
         }
 
         .close-menu {
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: var(--green-dark);
+            color: var(--text);
             cursor: pointer;
+            padding: 4px 8px;
             transition: color 0.2s;
         }
 
@@ -198,85 +413,135 @@
 
         .mobile-menu ul {
             list-style: none;
-            padding: 0 30px;
-            flex: 1;
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            flex: 1;
         }
 
-        .mobile-menu a {
+        .mobile-menu ul a {
             text-decoration: none;
-            font-weight: 700;
-            color: var(--green-dark);
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text);
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .mobile-menu a:hover {
+        .mobile-menu ul a:hover {
+            color: var(--green-mid);
+            transform: translateX(6px);
+        }
+
+        .mobile-menu ul a i {
+            width: 24px;
+            color: var(--green-light);
+        }
+
+        .mobile-menu ul a.active {
             color: var(--green-mid);
         }
 
-        .mobile-login {
-            padding: 20px 30px 30px;
-            text-align: center;
-            border-top: 1px solid #e2e8f0;
+        /* Login button inside the list – just below Contact */
+        .mobile-login-item {
+            margin-top: 8px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            list-style: none;
         }
 
-        .overlay {
+        .mobile-login-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 14px 28px !important;
+            font-size: 1rem !important;
+            border-radius: 50px !important;
+        }
+
+        .overlay-bg {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transition: 0.3s;
-            z-index: 998;
+            transition: all 0.35s ease;
         }
 
-        .overlay.active {
+        .overlay-bg.active {
             opacity: 1;
             visibility: visible;
         }
 
+        /* ============================================================
+           BACK TO TOP
+           ============================================================ */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: var(--green-mid);
-            color: white;
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+            color: white;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(43, 148, 72, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 99;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-            z-index: 99;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            font-size: 1.4rem;
         }
 
         .back-to-top.show {
             opacity: 1;
             visibility: visible;
+            transform: translateY(0);
         }
 
-        /* Marquee */
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(43, 148, 72, 0.4);
+        }
+
+        /* ============================================================
+           MARQUEE BANNER
+           ============================================================ */
         .marquee-banner {
-            background: var(--green-dark);
+            background: linear-gradient(90deg, var(--green-dark), #1b4332);
             color: white;
-            padding: 10px 0;
+            padding: 12px 0;
             overflow: hidden;
-            white-space: nowrap;
-            margin-top: 70px;
+            position: relative;
+            z-index: 1;
+            border-bottom: 3px solid var(--gold);
         }
 
         .marquee-content {
             display: inline-block;
-            animation: marquee 20s linear infinite;
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
             font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .marquee-content span {
+            margin-right: 48px;
+        }
+
+        .marquee-content span i {
+            margin-right: 8px;
+            color: var(--gold);
         }
 
         @keyframes marquee {
@@ -289,58 +554,60 @@
             }
         }
 
-        .marquee-content span {
-            margin-right: 30px;
-        }
-
-        /* Hero */
+        /* ============================================================
+           HERO — About
+           ============================================================ */
         .hero-about {
             background: linear-gradient(135deg, #e9f5e9 0%, #d4e6d4 100%);
             padding: 120px 0 80px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .gradient-text {
-            background: linear-gradient(90deg, var(--green-mid), var(--gold));
+        .hero-about::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: rgba(233, 196, 106, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-about .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-about h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .hero-about h1 .gradient-text {
+            background: linear-gradient(135deg, var(--green-mid), var(--gold));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            display: inline-block;
         }
 
-        /* Animation classes */
-        .reveal,
-        .slide-left,
-        .slide-right {
-            will-change: transform, opacity;
+        .hero-about p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 0 auto;
+            opacity: 0.85;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible,
-        .slide-left.visible,
-        .slide-right.visible {
-            opacity: 1;
-            transform: translate(0);
-        }
-
-        /* Cards */
+        /* ============================================================
+           CARDS & STATS
+           ============================================================ */
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -348,17 +615,20 @@
         }
 
         .about-card {
-            background: white;
+            background: var(--white);
             padding: 40px 30px;
-            border-radius: 28px;
+            border-radius: var(--radius);
             text-align: center;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid transparent;
         }
 
         .about-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--green-pale);
         }
 
         .about-card .icon {
@@ -367,30 +637,60 @@
             display: block;
         }
 
+        .about-card h3 {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: 24px;
             text-align: center;
         }
 
         .stat-box {
-            background: white;
+            background: var(--white);
             padding: 30px 20px;
-            border-radius: 28px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid transparent;
         }
 
         .stat-box:hover {
             transform: translateY(-6px);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--green-pale);
         }
 
         .stat-box i {
             font-size: 2.2rem;
             color: var(--green-mid);
             margin-bottom: 12px;
+            display: block;
+        }
+
+        .stat-box h3 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stat-box p {
+            color: var(--text-light);
+            opacity: 0.75;
+            font-size: 0.95rem;
         }
 
         .badge {
@@ -402,60 +702,163 @@
             margin: 6px;
             font-weight: 700;
             box-shadow: 0 4px 10px rgba(233, 196, 106, 0.4);
-            transition: transform 0.2s;
+            transition: transform 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .badge:hover {
             transform: scale(1.05);
         }
 
-        /* Footer */
+        /* ============================================================
+           FOOTER
+           ============================================================ */
         .footer {
-            background: #1b4332;
-            color: #ccc;
-            padding: 60px 0 30px;
+            background: var(--green-dark);
+            color: #cbd5e1;
+            padding: 60px 0 28px;
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 40px;
-            margin-bottom: 30px;
+            margin-bottom: 36px;
         }
 
-        .footer-grid h4 {
+        .footer-brand h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand h3 img {
+            height: 36px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .footer-brand h3 span {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-brand p {
+            opacity: 0.7;
+            font-size: 0.95rem;
+            max-width: 300px;
+        }
+
+        .footer-brand .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .footer-brand .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-brand .socials a:hover {
+            background: var(--gold);
+            color: var(--green-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
             color: white;
+            font-weight: 700;
             margin-bottom: 16px;
+            font-size: 1.05rem;
         }
 
-        .footer-grid ul {
+        .footer-col ul {
             list-style: none;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .footer-grid a {
-            color: #aaa;
+        .footer-col ul a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.2s;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            display: inline-block;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--gold);
+            transform: translateX(4px);
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .footer-bottom .legal-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom .legal-links a {
+            color: #cbd5e1;
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .footer-grid a:hover {
+        .footer-bottom .legal-links a:hover {
             color: var(--gold);
         }
 
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.95rem;
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .hero-about h1 {
+                font-size: 2.8rem;
+            }
         }
 
         @media (max-width: 768px) {
-
-            .nav-links,
-            .navbar .btn-primary {
+            .nav-links {
                 display: none;
             }
 
@@ -463,8 +866,8 @@
                 display: flex;
             }
 
-            .grid-2 {
-                grid-template-columns: 1fr;
+            .section-title h2 {
+                font-size: 1.8rem;
             }
 
             .footer-grid {
@@ -472,233 +875,449 @@
                 text-align: center;
             }
 
-            .hero-about h1 {
-                font-size: 2rem;
+            .footer-brand p {
+                max-width: 100%;
             }
 
+            .footer-brand .socials {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .marquee-content {
+                font-size: 0.75rem;
+            }
+
+            .marquee-content span {
+                margin-right: 24px;
+            }
+
+            .back-to-top {
+                bottom: 16px;
+                right: 16px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+
+            .navbar {
+                height: 64px;
+            }
+
+            .logo img {
+                height: 90px;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-about h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-about p {
+                font-size: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .stat-box h3 {
+                font-size: 1.8rem;
+            }
+
+            .badge {
+                padding: 10px 20px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
             .section-title h2 {
-                font-size: 2rem;
+                font-size: 1.5rem;
+            }
+
+            .section-title p {
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .marquee-banner {
+                padding: 8px 0;
+            }
+
+            .marquee-content {
+                font-size: 0.65rem;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .hero-about {
+                padding: 100px 0 60px;
+            }
+
+            .hero-about h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card {
+                padding: 30px 20px;
+            }
+
+            .stat-box {
+                padding: 24px 16px;
             }
         }
     </style>
 </head>
 
 <body>
-    <header class="header">
+
+    <!-- ============================================================
+    HEADER — STICKY
+    ============================================================ -->
+    <header class="header" id="header">
         <nav class="navbar container">
-            <a href="index.html" class="logo">🌿 Stackly</a>
+            <a href="index.html" class="logo">
+                <img src="logo.webp" alt="Stackly Logo" />
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="about.html" class="active">About</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="features.html">Features</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="login-waste.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
             </ul>
-            <a href="login-waste.html" class="btn btn-primary">Login</a>
-            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
 
+    <!-- ============================================================
+    MOBILE MENU
+    ============================================================ -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-            <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+            <a href="index.html" class="logo-sm">
+                <img src="logo.webp" alt="Stackly Logo" />
+            </a>
+            <button class="close-menu" id="closeMenu" aria-label="Close menu"><i class="fas fa-times"></i></button>
         </div>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="features.html">Features</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li><a href="features.html"><i class="fas fa-star"></i> Features</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li class="mobile-login-item">
+                <a href="login-waste.html" class="btn btn-primary mobile-login-btn">
+                    </i> Login
+                </a>
+            </li>
         </ul>
-        <div class="mobile-login">
-            <a href="login-waste.html" class="btn btn-primary" style="display:block; width:100%;">Login</a>
-        </div>
     </div>
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay-bg" id="overlayBg"></div>
 
-    <!-- Marquee Banner -->
+    <!-- ============================================================
+    MARQUEE BANNER
+    ============================================================ -->
     <div class="marquee-banner">
         <div class="marquee-content">
-            <span>♻️ Join the green revolution</span>
-            <span>🌍 Zero waste is our goal</span>
-            <span>📊 Technology for sustainability</span>
-            <span>🤝 Partnering with communities</span>
-            <span>♻️ Join the green revolution</span>
-            <span>🌍 Zero waste is our goal</span>
-            <span>📊 Technology for sustainability</span>
-            <span>🤝 Partnering with communities</span>
+            <span><i class="fas fa-recycle"></i> Join the green revolution</span>
+            <span><i class="fas fa-globe-americas"></i> Zero waste is our goal</span>
+            <span><i class="fas fa-chart-line"></i> Technology for sustainability</span>
+            <span><i class="fas fa-handshake"></i> Partnering with communities</span>
+            <span><i class="fas fa-seedling"></i> 2.4M+ tons recycled globally</span>
+            <span><i class="fas fa-recycle"></i> Join the green revolution</span>
+            <span><i class="fas fa-globe-americas"></i> Zero waste is our goal</span>
+            <span><i class="fas fa-chart-line"></i> Technology for sustainability</span>
+            <span><i class="fas fa-handshake"></i> Partnering with communities</span>
+            <span><i class="fas fa-seedling"></i> 2.4M+ tons recycled globally</span>
         </div>
     </div>
 
-    <main>
-        <section class="hero-about">
-            <div class="container reveal">
-                <h1><span>We are </span><span class="gradient-text">Stackly</span></h1>
-                <p>Pioneering sustainable waste solutions since 2020. We combine technology, community, and innovation
-                    to create a cleaner planet.</p>
-            </div>
-        </section>
+    <!-- ============================================================
+    HERO — About
+    ============================================================ -->
+    <section class="hero-about">
+        <div class="container reveal">
+            <h1>We are <span class="gradient-text">Stackly</span></h1>
+            <p>Pioneering sustainable waste solutions since 2020. We combine technology, community, and innovation
+                to create a cleaner planet.</p>
+        </div>
+    </section>
 
-        <section>
-            <div class="container">
-                <div class="section-title reveal">
-                    <h2>Our Driving <span class="gradient-text">Force</span></h2>
-                </div>
-                <div class="grid-2">
-                    <div class="about-card slide-left">
-                        <span class="icon">🌍</span>
-                        <h3>Our Mission</h3>
-                        <p>To eliminate waste through cutting‑edge technology and community‑driven action.</p>
-                    </div>
-                    <div class="about-card slide-right">
-                        <span class="icon">🎯</span>
-                        <h3>Our Vision</h3>
-                        <p>A zero‑waste world where every resource is reused and nothing is thrown away.</p>
-                    </div>
-                </div>
+    <!-- ============================================================
+    MISSION & VISION
+    ============================================================ -->
+    <section>
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="section-label">Our Driving Force</span>
+                <h2>Our <span class="highlight">Mission &amp; Vision</span></h2>
             </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <div class="section-title reveal">
-                    <h2>Our <span class="gradient-text">Impact</span> in Numbers</h2>
-                    <p>Real results from real communities around the globe</p>
+            <div class="grid-2">
+                <div class="about-card slide-left">
+                    <span class="icon">🌍</span>
+                    <h3>Our Mission</h3>
+                    <p>To eliminate waste through cutting‑edge technology and community‑driven action.</p>
                 </div>
-                <div class="stats-grid">
-                    <div class="stat-box slide-left">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>45%</h3>
-                        <p>Less landfill waste</p>
-                    </div>
-                    <div class="stat-box slide-right">
-                        <i class="fas fa-truck"></i>
-                        <h3>30%</h3>
-                        <p>Route efficiency gain</p>
-                    </div>
-                    <div class="stat-box slide-left">
-                        <i class="fas fa-leaf"></i>
-                        <h3>100k+</h3>
-                        <p>Trees saved</p>
-                    </div>
-                    <div class="stat-box slide-right">
-                        <i class="fas fa-users"></i>
-                        <h3>2M+</h3>
-                        <p>Citizens engaged</p>
-                    </div>
+                <div class="about-card slide-right">
+                    <span class="icon">🎯</span>
+                    <h3>Our Vision</h3>
+                    <p>A zero‑waste world where every resource is reused and nothing is thrown away.</p>
                 </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container reveal">
-                <div class="section-title">
-                    <h2>Certifications & <span class="gradient-text">Recognition</span></h2>
-                </div>
-                <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-                    <span class="badge">ISO 14001</span>
-                    <span class="badge">Zero Waste Certified</span>
-                    <span class="badge">B Corp Pending</span>
-                    <span class="badge">Green Business</span>
-                    <span class="badge">EPA Partner</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div>
-                <h3 style="font-size:1.8rem; margin-bottom:10px;">🌿 Stackly</h3>
-                <p>Smart waste management for a sustainable future.</p>
-            </div>
-            <div>
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="features.html">Features</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="404.html">Documentation</a></li>
-                    <li><a href="404.html">Help Center</a></li>
-                    <li><a href="404.html">Blog</a></li>
-                    <li><a href="404.html">API</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="404.html">Privacy Policy</a></li>
-                    <li><a href="404.html">Terms of Service</a></li>
-                    <li><a href="404.html">Cookie Policy</a></li>
-                </ul>
             </div>
         </div>
-        <div class="copyright">© 2026 Stackly. All Rights Reserved.</div>
+    </section>
+
+    <!-- ============================================================
+    IMPACT IN NUMBERS
+    ============================================================ -->
+    <section style="background:var(--white);">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="section-label">Our Impact</span>
+                <h2>Impact in <span class="highlight">Numbers</span></h2>
+                <p>Real results from real communities around the globe</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box slide-left">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>45%</h3>
+                    <p>Less landfill waste</p>
+                </div>
+                <div class="stat-box slide-right">
+                    <i class="fas fa-truck"></i>
+                    <h3>30%</h3>
+                    <p>Route efficiency gain</p>
+                </div>
+                <div class="stat-box slide-left">
+                    <i class="fas fa-leaf"></i>
+                    <h3>100k+</h3>
+                    <p>Trees saved</p>
+                </div>
+                <div class="stat-box slide-right">
+                    <i class="fas fa-users"></i>
+                    <h3>2M+</h3>
+                    <p>Citizens engaged</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CERTIFICATIONS
+    ============================================================ -->
+    <section style="background:var(--bg-cream);">
+        <div class="container reveal">
+            <div class="section-title">
+                <span class="section-label">Recognition</span>
+                <h2>Certifications &amp; <span class="highlight">Recognition</span></h2>
+            </div>
+            <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+                <span class="badge">ISO 14001</span>
+                <span class="badge">Zero Waste Certified</span>
+                <span class="badge">B Corp Pending</span>
+                <span class="badge">Green Business</span>
+                <span class="badge">EPA Partner</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><img src="logo.webp" alt="Stackly Logo" /><span>Stackly</span></h3>
+                    <p>Smart waste management for a sustainable future. Empowering cities and businesses to reduce waste
+                        and increase recycling.</p>
+                    <div class="socials">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="404.html">Documentation</a></li>
+                        <li><a href="404.html">Help Center</a></li>
+                        <li><a href="404.html">API Reference</a></li>
+                        <li><a href="404.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="404.html">Privacy Policy</a></li>
+                        <li><a href="404.html">Terms of Service</a></li>
+                        <li><a href="404.html">Cookie Policy</a></li>
+                        <li><a href="404.html">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Stackly. All Rights Reserved.</span>
+                <div class="legal-links">
+                    <a href="404.html">Privacy</a>
+                    <a href="404.html">Terms</a>
+                    <a href="404.html">Cookies</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    <!-- ============================================================
+    BACK TO TOP
+    ============================================================ -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
     <script>
-        // Mobile menu
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('overlay');
-        const closeMenu = document.getElementById('closeMenu');
+        (function () {
+            'use strict';
 
-        function openMenu() {
-            mobileMenu.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            // ============================================================
+            // 1. HEADER SCROLL EFFECT
+            // ============================================================
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
 
-        function closeMenuFunc() {
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            // ============================================================
+            // 2. MOBILE MENU
+            // ============================================================
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlayBg = document.getElementById('overlayBg');
+            const closeMenu = document.getElementById('closeMenu');
 
-        hamburger.addEventListener('click', openMenu);
-        overlay.addEventListener('click', closeMenuFunc);
-        closeMenu.addEventListener('click', closeMenuFunc);
+            function openMenu() {
+                mobileMenu.classList.add('active');
+                overlayBg.classList.add('active');
+                hamburger.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
 
-        // Back to top
-        const backBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            backBtn.classList.toggle('show', window.scrollY > 500);
-        });
-        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            function closeMenuFunc() {
+                mobileMenu.classList.remove('active');
+                overlayBg.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = '';
+            }
 
-        // Intersection Observer for scroll animations – works reliably on mobile
-        const animatedElements = document.querySelectorAll('.reveal, .slide-left, .slide-right');
+            hamburger.addEventListener('click', openMenu);
+            overlayBg.addEventListener('click', closeMenuFunc);
+            closeMenu.addEventListener('click', closeMenuFunc);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeMenuFunc();
+            });
 
-        if ('IntersectionObserver' in window) {
+            // ============================================================
+            // 3. BACK TO TOP
+            // ============================================================
+            const backBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 500) {
+                    backBtn.classList.add('show');
+                } else {
+                    backBtn.classList.remove('show');
+                }
+            });
+            backBtn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ============================================================
+            // 4. INTERSECTION OBSERVER — reveal animations
+            // ============================================================
             const observerOptions = {
-                threshold: 0,
+                threshold: 0.1,
                 rootMargin: '0px 0px -30px 0px'
             };
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+            const observerCallback = function (entries) {
+                entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            };
 
-            animatedElements.forEach(el => observer.observe(el));
-        } else {
-            // Fallback for older browsers
-            animatedElements.forEach(el => el.classList.add('visible'));
-        }
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            document.querySelectorAll('.reveal, .slide-left, .slide-right, .scale-in')
+                .forEach(function (el) {
+                    observer.observe(el);
+                });
+
+            // ============================================================
+            // 5. SMOOTH ANCHOR SCROLL
+            // ============================================================
+            document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const offset = 80;
+                        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                        closeMenuFunc();
+                    }
+                });
+            });
+
+        })();
     </script>
+
 </body>
 
 </html>
